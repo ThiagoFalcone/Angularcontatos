@@ -1,0 +1,51 @@
+<section class="contato-detalhes" aria-labelledby="detalhes-contato-titulo">
+  <h2 id="detalhes-contato-titulo" class="titulo-secao">Detalhes do Contato</h2>
+
+  <div *ngIf="contato; else naoEncontrado" class="detalhes-container">
+    <div class="detalhes-card">
+      <div class="campo-detalhe">
+        <span class="rotulo"><i class="fas fa-user"></i> Nome:</span>
+        <span class="valor">{{ contato.nome }}</span>
+      </div>
+      
+      <div class="campo-detalhe">
+        <span class="rotulo"><i class="fas fa-envelope"></i> Email:</span>
+        <span class="valor">
+          <a href="mailto:{{ contato.email }}" aria-label="Enviar email para {{ contato.nome }}">
+            {{ contato.email }}
+          </a>
+        </span>
+      </div>
+      
+      <div class="campo-detalhe">
+        <span class="rotulo"><i class="fas fa-phone"></i> Telefone:</span>
+        <span class="valor">
+          <a href="tel:{{ contato.telefone }}" aria-label="Ligar para {{ contato.nome }}">
+            {{ contato.telefone | telefone }}
+          </a>
+        </span>
+      </div>
+
+      <div class="acoes">
+        <a routerLink="/contatos" class="botao-voltar">
+          <i class="fas fa-arrow-left"></i> Voltar para lista
+        </a>
+        <button class="botao-editar" routerLink="/contatos/editar/{{contato.id}}" aria-label="Editar contato">
+          <i class="fas fa-edit"></i> Editar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #naoEncontrado>
+    <div class="nao-encontrado-container">
+      <div class="mensagem-erro">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>Contato não encontrado ou não existe mais.</p>
+      </div>
+      <a routerLink="/contatos" class="botao-voltar">
+        <i class="fas fa-arrow-left"></i> Voltar para lista de contatos
+      </a>
+    </div>
+  </ng-template>
+</section>
